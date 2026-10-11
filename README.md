@@ -29,7 +29,7 @@ cargo run -- serve --port 8080
 
 ## 项目结构
 
-```
+```text
 Flowbit/
 ├── flowbit-core/           # 核心库: DAG、节点、执行、存储、错误
 ├── flowbit-cli/            # 命令行工具

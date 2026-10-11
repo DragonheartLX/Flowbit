@@ -37,7 +37,7 @@ Flowbit 是基于 Rust 的 AI agent 框架。用 JSON DAG 声明式编排多 age
 
 Bootstrap 阶段。仅 workspace 骨架。
 
-```
+```text
 Flowbit/
 ├── Cargo.toml
 ├── .gitignore
@@ -54,7 +54,7 @@ Flowbit/
 
 ### 目录结构
 
-```
+```text
 Flowbit/
 ├── Cargo.toml                     # workspace
 ├── flowbit-core/                  # 核心库
@@ -620,7 +620,7 @@ tracing-subscriber 输出格式。
 
 ### CLI 命令签名
 
-```
+```bash
 flowbit run <workflow.json> [OPTIONS]
   --input <JSON>        workflow 入口参数
   --resume <run_id>     从 checkpoint 恢复
