@@ -12,11 +12,9 @@ Flowbit 是基于 Rust 的 AI agent 框架。用 JSON DAG 声明式编排多 age
 - `flowbit-server/web/` — 前端应用, Vue 3 + TDesign + vue-flow。
 - `flowbit-examples/` — 示例 workflow 与 custom 节点。
 
-依赖方向: core ← cli / server / examples。server 托管 web 静态资源。
-
 ## 关键决策
 
-完整决策见 `docs/ARCHITECTURE.md` (本地, gitignored)。
+完整决策见 `docs/ARCHITECTURE.md`。
 
 - Workflow: DAG + JSON, 纯路径变量引用 `{{path.to.field}}`。
 - 执行: tokio 全异步, per-run 有界 worker pool, fail-fast + 完整 retry。
@@ -83,7 +81,7 @@ cargo coverage --workspace
 
 ## 待办
 
-见 `docs/TODO.md` (本地, gitignored)。
+见 `docs/TODO.md`。
 
 - P0 核心引擎: 28 项
 - P1 CLI 与库: 19 项
@@ -92,17 +90,14 @@ cargo coverage --workspace
 
 ## 参考
 
-- `docs/ARCHITECTURE.md` — 完整架构文档 (本地)。
-- `docs/TODO.md` — 优先级待办 (本地)。
-- https://rig.rs/docs — rig 官方文档。
-- https://docs.rs/axum — axum HTTP server。
-- https://docs.rs/sqlx — sqlx SQLite。
-- https://vue-flow.dev — 前端 DAG 画布。
+- `docs/ARCHITECTURE.md` — 完整架构文档。
+- `docs/TODO.md` — 优先级待办。
+- <https://rig.rs/docs> — rig 官方文档。
+- <https://docs.rs/axum> — axum HTTP server。
+- <https://docs.rs/sqlx> — sqlx SQLite。
+- <https://vue-flow.dev> — 前端 DAG 画布。
 
 ## 注意事项
 
-- `docs/` 目录本地保留, 不入库。
-- `.gitignore` 不收 `MEMORY.md`。
-- `docs/` 目录已 gitignore, 编辑后无需 `git add`。
 - IDE 开着工程时 rust-analyzer 会自动跑 `cargo check`, 语义改动一定来自人。
 - `edit` 工具做纯 no-op 编辑会吞换行, 注释改写用 `edit` 时 oldText 与 newText 都要带尾随换行。
