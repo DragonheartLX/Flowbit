@@ -83,9 +83,9 @@ cargo coverage --workspace
 
 见 `docs/TODO.md`。
 
-- P0 核心引擎: 28 项
+- P0 核心引擎: 29 项
 - P1 CLI 与库: 19 项
-- P2 Server 与 Web UI: 20 项
+- P2 Server 与 Web UI: 19 项
 - P3 完善: 5 项
 
 ## 参考

@@ -39,15 +39,15 @@ Bootstrap 阶段。仅 workspace 骨架。
 
 ```text
 Flowbit/
-├── Cargo.toml
+├── Cargo.toml                 # workspace, 唯一 member = flowbit-core
 ├── .gitignore
 ├── docs/
 │   ├── TODO.md
 │   └── ARCHITECTURE.md
-└── flowbit/
+└── flowbit-core/              # 核心库, 目前仅文档注释骨架
     ├── Cargo.toml
     └── src/
-        └── main.rs
+        └── lib.rs
 ```
 
 ## 规划
@@ -73,7 +73,7 @@ Flowbit/
 │   └── src/
 │       ├── main.rs
 │       ├── config.rs
-│       └── commands/              # run / validate / dev
+│       └── commands/              # run / validate / list-nodes / serve
 ├── flowbit-server/                # HTTP server + Web UI
 │   ├── src/
 │   │   ├── main.rs                # Axum
@@ -104,7 +104,7 @@ Flowbit/
 
 ### Workflow JSON
 
-顶层字段：`name`、`inputs`、`agents`、`nodes`、`edges`、可选 `sub_workflows`。
+- 顶层字段：`name`、`inputs`、`agents`、`nodes`、`edges`、可选 `sub_workflows`。`inputs` 是声明数组，运行时变量通过 `inputs.<name>` 命名空间引用。
 
 ```json
 {
@@ -253,7 +253,7 @@ pub trait Node: Send + Sync {
 - 支持字段访问、数组索引、字面量与引用混合。
 - 可选变量：`{{path | default(value)}}`，缺失时取默认值。
 - 必需变量解析期校验，缺失立即 `E_PARSE_UNDEFINED_VAR`。
-- `inputs.*` 来自 workflow 入口参数。
+- `inputs.*` 来自 workflow 入口参数，变量名对应顶层 `inputs` 数组中声明的 `name`。
 - `<node_id>.<output_port>` 来自节点输出。
 - `sum1.<sub_node>.<output>` 来自 composite 内部节点。
 - 解析期完成替换，运行时不再动态求值。
@@ -270,19 +270,17 @@ Agent 内嵌在 workflow 顶层 `agents` 字段定义，完全转发 `rig::Agent
     "tools": [{"impl": "search"}],
     "metadata": {},
     "context": [],
-    "completion_options": {
-      "temperature": 0.7,
-      "max_tokens": 4096,
-      "top_p": 1.0,
-      "stop": ["\n"],
-      "response_format": {"type": "json_object"}
-    }
+    "temperature": 0.7,
+    "max_tokens": 4096,
+    "top_p": 1.0,
+    "stop": ["\n"],
+    "response_format": {"type": "json_object"}
   }
 }
 ```
 
 - 每个 agent 对应一个 `rig::Agent` 实例。
-- 字段完全对齐 `rig::Agent` 当前版本。
+- 字段完全对齐 `rig::Agent` 当前版本，扁平写在 agent 顶层，不嵌套 `completion_options`。
 - rig 升级时 schema 同步更新。
 - 同一 workflow 内 agent 可复用。
 
@@ -435,7 +433,7 @@ API token 中间件。
 
 ### Web UI 页面
 
-Vue 3 + Vite + TDesign，五页方案。
+- Vue 3 + Vite + TDesign + vue-flow，五页方案。
 
 - `/editor`：DAG 画布，拖拽节点、连线、属性面板。
 - `/runner`：执行面板，输入参数、启动、实时日志。

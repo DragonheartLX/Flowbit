@@ -17,6 +17,7 @@
 - [ ] CLI 层用 anyhow 聚合错误。
 - [ ] 定义 workflow JSON schema，产出 JSON Schema 校验文件。
 - [ ] 实现 workflow 解析器，文件读取到 DAG 结构。
+- [ ] 引入 petgraph crate，用于 DAG 拓扑排序与并行度计算。
 - [ ] 实现 DAG 拓扑排序与并行度计算，基于 petgraph。
 - [ ] 定义 Node trait，多输入多输出，参数可配。
 - [ ] 定义 NodePorts 与 ParamsSchema 类型。
@@ -32,21 +33,6 @@
 - [ ] 实现 checkpoint 写入与读取，包含 input_fingerprint。
 - [ ] 实现从 checkpoint 恢复执行，严格跳过已完成节点。
 - [ ] 实现 API token 中间件，Bearer 校验。
-- [ ] 实现 workflow 解析器，文件读取到 DAG 结构。
-- [ ] 实现 DAG 拓扑排序与并行度计算，基于 petgraph。
-- [ ] 定义 Node trait，多输入多输出，参数可配。
-- [ ] 定义 NodePorts 与 ParamsSchema 类型。
-- [ ] 实现 NodeKind 分发与注册。
-- [ ] 实现 agent 节点，封装 `rig::Agent::invoke()`，支持流式下发生成。
-- [ ] 实现 tool 节点，直接调用 rig tool。
-- [ ] 实现全局 Context，JSON 存储加 `{{path.to.field}}` 纯路径解析。
-- [ ] 实现有界 worker pool，默认并发 8，可配置。
-- [ ] 实现 fail-fast 与节点级 retry。
-- [ ] 定义 RunError 分层枚举，含 code / node_id / is_retryable。
-- [ ] 实现 `.flowbit.toml` 配置加载，密钥从环境变量读取。
-- [ ] 初始化 SQLite 表结构：workflows、runs、checkpoints、logs。
-- [ ] 实现 checkpoint 写入与读取。
-- [ ] 实现从 checkpoint 恢复执行。
 
 ## P1 — CLI 与库
 
